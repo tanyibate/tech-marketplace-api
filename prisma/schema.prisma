@@ -16,8 +16,10 @@ model User {
   name  String
   createdAt DateTime @default(now())
   address String?
-  password  String
+  password  String?
   role Role @default(USER)
+  googleId String? @unique
+
 
 }
 

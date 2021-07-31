@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 const prisma = require("../utils/client");
@@ -6,12 +7,13 @@ const prisma = require("../utils/client");
 router.post("/register", async (req, res) => {
   const { fullName, email, password } = req.body;
   let newUser;
+  const hashedPassword = await bcrypt.hash(password, 10); // hashing password for security so if db gets comprimised passwords cannot get retrieved
   try {
     newUser = await prisma.user.create({
       data: {
         name: fullName,
         email: email,
-        password: password,
+        password: hashedPassword,
       },
     });
   } catch (err) {

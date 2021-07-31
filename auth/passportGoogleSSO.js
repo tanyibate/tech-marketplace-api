@@ -1,8 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
-const User = require("../models/user");
-
+const prisma = require("../utils/client");
 const GOOGLE_CALLBACK_URL = "http://localhost:5000/api/v1/auth/google/callback";
 
 passport.use(
@@ -13,39 +11,36 @@ passport.use(
       callbackURL: GOOGLE_CALLBACK_URL,
       passReqToCallback: true,
     },
-    async (req, accessToken, refreshToken, profile, cb) => {
-      const defaultUser = {
-        fullName: `${profile.name.givenName} ${profile.name.familyName}`,
-        email: profile.emails[0].value,
-        picture: profile.photos[0].value,
-        googleId: profile.id,
-      };
-
-      const user = await User.findOrCreate({
-        where: { googleId: profile.id },
-        defaults: defaultUser,
-      }).catch((err) => {
-        console.log("Error signing up", err);
-        cb(err, null);
+    async (req, accessToken, refreshToken, profile, done) => {
+      const user = await prisma.user.upsert({
+        where: {
+          googleId: profile.id,
+        },
+        update: {},
+        create: {
+          name: `${profile.name.givenName} ${profile.name.familyName}`,
+          email: profile.emails[0].value,
+          googleId: profile.id,
+        },
       });
-
-      if (user && user[0]) return cb(null, user && user[0]);
+      if (!user) {
+        return done(null, false, { message: "Error" });
+      }
+      return done(null, user);
     }
   )
 );
 
-passport.serializeUser((user, cb) => {
-  console.log("Serializing user:", user);
-  cb(null, user.id);
-});
-
-passport.deserializeUser(async (id, cb) => {
-  const user = await User.findOne({ where: { id } }).catch((err) => {
-    console.log("Error deserializing", err);
-    cb(err, null);
+const getUserById = async (id) => {
+  return await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
   });
+};
 
-  console.log("DeSerialized user", user);
-
-  if (user) cb(null, user);
-});
+passport.serializeUser((user, done) => done(null, user.id)); // save user to session
+passport.deserializeUser(async (id, done) => {
+  const user = await getUserById(id);
+  return done(null, user);
+}); //remove user from session

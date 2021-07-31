@@ -6,17 +6,17 @@ require("dotenv").config();
 const session = require("express-session");
 let RedisStore = require("connect-redis")(session);
 const redis = require("redis");
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const prisma = require("./utils/client");
+
 const redisClient = redis.createClient({
-  host: "redis-19391.c250.eu-central-1-1.ec2.cloud.redislabs.com",
-  port: "19391",
-  password: "IRtnIx9qg04ASdRg5ecMscTpbRWsaPBa",
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  password: process.env.REDIS_PASSWORD,
 });
 const initializePassport = require("./auth/passport");
 
 //require("./auth/passport");
-//require("./auth/passportGoogleSSO");
+require("./auth/passportGoogleSSO");
 
 const middlewares = require("./middlewares");
 const api = require("./api");
@@ -38,8 +38,18 @@ app.use(
 
 initializePassport(
   passport,
-  async (email) => await users.findOne({ email: email }),
-  async (id) => await users.findOne(id)
+  async (email) =>
+    await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+    }),
+  async (id) =>
+    await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    })
 );
 app.use(express.json());
 

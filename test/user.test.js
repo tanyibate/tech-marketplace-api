@@ -1,6 +1,5 @@
 const superTest = require("supertest");
 const chai = require("chai");
-const assert = chai.assert;
 const expect = chai.expect;
 const apiUrl = "http://localhost:5000";
 const app = require("../app");
@@ -23,7 +22,18 @@ before(function (done) {
 });
 
 describe("get profile", () => {
-  it("should return a 200 response if the user is logged in", function (done) {
+  it("should return a 200 response if the user is logged in", async function () {
+    let response = await authenticatedUser
+      .get("/api/v1/auth/user")
+      .then((response) => {
+        return response;
+      });
+    expect(response.status, "Status Successful").to.equal(200);
+    expect(response.body.email, "Email Matches test user").to.equal(
+      "bate.tanyi@yahoo.com"
+    );
+
+    /* another way of testing
     authenticatedUser
       .get("/api/v1/auth/user")
       .expect(200)
@@ -32,5 +42,6 @@ describe("get profile", () => {
         done();
       })
       .catch((err) => done(err));
+    */
   });
 });

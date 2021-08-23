@@ -19,11 +19,50 @@ model User {
   password  String?
   role Role @default(USER)
   googleId String? @unique
-
-
 }
+
+model Product {
+  id    Int     @id @default(autoincrement())
+  name  String
+  price Float
+  createdAt DateTime @default(now())  
+  category Categories
+  updatedAt DateTime @updatedAt
+  productImage Json?
+  categoryImage Json?
+  othersImage Json?
+  imageGallery Json[]
+  accessories Accessories[]
+}
+
+model Accessories {
+  id Int @id @default(autoincrement())
+  product  Product   @relation(fields: [productId], references: [id])
+  productId Int
+  quantity Int
+}
+
+
 
 enum Role {
   USER
   ADMIN
+}
+
+enum Categories {
+  Headphones
+  Speakers
+  Laptops
+  Desktops
+  Mobiles
+  Televisions
+  Fridges
+  Freezers
+  Earphones
+}
+
+enum ImageType {
+  mobile
+  desktop
+  tablet
 }

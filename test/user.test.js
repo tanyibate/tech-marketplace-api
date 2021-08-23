@@ -22,7 +22,7 @@ before(function (done) {
 });
 
 describe("get profile", () => {
-  it("should return a 200 response if the user is logged in", async function () {
+  it("should return a 200 response if the user is logged in", async function (/*done*/) {
     let response = await authenticatedUser
       .get("/api/v1/auth/user")
       .then((response) => {

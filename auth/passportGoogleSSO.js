@@ -12,15 +12,24 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       const user = await prisma.user.upsert({
         where: {
           googleId: profile.id,
         },
-        update: {},
-        create: {
-          name: `${profile.name.givenName} ${profile.name.familyName}`,
+        update: {
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
           email: profile.emails[0].value,
           googleId: profile.id,
+          profilePictureUrl: profile.photos[0].value,
+        },
+        create: {
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          email: profile.emails[0].value,
+          googleId: profile.id,
+          profilePictureUrl: profile.photos[0].value,
         },
       });
       if (!user) {

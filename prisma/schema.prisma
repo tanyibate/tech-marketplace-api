@@ -13,12 +13,14 @@ generator client {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
-  name  String
+  firstName  String
+  lastName String
   createdAt DateTime @default(now())
   address String?
   password  String?
   role Role @default(USER)
   googleId String? @unique
+  profilePictureUrl String?
 }
 
 model Product {
@@ -28,10 +30,6 @@ model Product {
   createdAt DateTime @default(now())  
   category Categories
   updatedAt DateTime @updatedAt
-  productImage Json?
-  categoryImage Json?
-  othersImage Json?
-  imageGallery Json[]
   accessories Accessories[]
 }
 

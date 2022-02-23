@@ -6,7 +6,6 @@ require("dotenv").config();
 const session = require("express-session");
 let RedisStore = require("connect-redis")(session);
 const redis = require("redis");
-const prisma = require("./utils/client");
 
 const redisClient = redis.createClient({
   host: process.env.REDIS_HOST,
@@ -15,12 +14,10 @@ const redisClient = redis.createClient({
 });
 const initializePassport = require("./auth/passport");
 
-//require("./auth/passport");
-require("./auth/passportGoogleSSO");
-
 const middlewares = require("./middlewares");
-const api = require("./api");
+const api = require("./api/routes");
 const passport = require("passport");
+//require("../auth/passportGoogleSSO");
 
 const app = express();
 
@@ -36,21 +33,7 @@ app.use(
   })
 );
 
-initializePassport(
-  passport,
-  async (email) =>
-    await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    }),
-  async (id) =>
-    await prisma.user.findUnique({
-      where: {
-        id: id,
-      },
-    })
-);
+initializePassport(passport);
 app.use(express.json());
 
 app.use(

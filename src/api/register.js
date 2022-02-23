@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 
 const router = express.Router();
-const prisma = require("../utils/client");
+const prisma = require("../utils/prismaClient");
 
 router.post("/register", async (req, res) => {
   const { firstName, lastName, email, password } = req.body;

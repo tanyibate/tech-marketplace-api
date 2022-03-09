@@ -10,6 +10,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model HomePage {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  heroProduct Product? @relation("HomePage Hero Product")
+  firstProduct Product? @relation("HomePage First Product")
+  secondProduct Product? @relation("HomePage Second Product")
+  thirdProduct Product? @relation("HomePage Third Product")
+}
+
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
@@ -26,18 +35,57 @@ model User {
 model Product {
   id    Int     @id @default(autoincrement())
   name  String
-  price Float
+  slug String
+  price Int
   createdAt DateTime @default(now())  
   category Categories
   updatedAt DateTime @updatedAt
   accessories Accessories[]
+  new Boolean
+  description String
+  features String
+  productImage Image? @relation("Product Image")
+  otherImage Image? @relation("Other Image")
+  categoryImage Image? @relation("Category Image")
+  gallery Image[] @relation("Gallery Image")
+  homePageHeroProduct HomePage? @relation("HomePage Hero Product",fields: [homePageHeroProductId], references: [id])
+  homePageHeroProductId Int? 
+  homePageFirstProduct HomePage? @relation("HomePage First Product",fields: [homePageFirstProductId], references: [id])
+  homePageFirstProductId Int?
+  homePageSecondProduct HomePage? @relation("HomePage Second Product",fields: [homePageSecondProductId], references: [id])
+  homePageSecondProductId Int?
+  homePageThirdProduct HomePage? @relation("HomePage Third Product",fields: [homePageThirdProductId], references: [id])
+  homePageThirdProductId Int?    
+}
+
+model InventoryItem{
+  id    Int     @id @default(autoincrement())
+  serialNumber Int
 }
 
 model Accessories {
   id Int @id @default(autoincrement())
+  name String
   product  Product   @relation(fields: [productId], references: [id])
   productId Int
   quantity Int
+}
+
+
+
+model Image{
+  id Int @id @default(autoincrement())
+  mobileImageUrl String
+  tabletImageUrl String
+  desktopImageUrl String
+  categoryImage Product? @relation("Category Image",fields: [categoryImageId], references: [id])
+  categoryImageId Int? 
+  productImage Product? @relation("Product Image",fields: [productImageId], references: [id])
+  productImageId Int? 
+  otherImage Product? @relation("Other Image",fields: [otherImageId], references: [id])
+  otherImageId Int? 
+  galleryImage Product @relation("Gallery Image",fields: [galleryImageId], references: [id])
+  galleryImageId Int
 }
 
 

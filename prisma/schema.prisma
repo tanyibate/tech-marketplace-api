@@ -41,12 +41,14 @@ model Product {
   category Categories
   updatedAt DateTime @updatedAt
   accessories Accessories[]
-  new Boolean
+  isNew Boolean
   description String
   features String
   productImage Image? @relation("Product Image")
   otherImage Image? @relation("Other Image")
   categoryImage Image? @relation("Category Image")
+  heroImage Image? @relation("Hero Image")
+  homePageImage Image? @relation("HomePage Image")
   gallery Image[] @relation("Gallery Image")
   homePageHeroProduct HomePage? @relation("HomePage Hero Product",fields: [homePageHeroProductId], references: [id])
   homePageHeroProductId Int? 
@@ -79,7 +81,11 @@ model Image{
   tabletImageUrl String
   desktopImageUrl String
   categoryImage Product? @relation("Category Image",fields: [categoryImageId], references: [id])
-  categoryImageId Int? 
+  categoryImageId Int?
+  heroImage Product? @relation("Hero Image",fields: [heroImageId], references: [id])
+  heroImageId Int?
+  homePageImage Product? @relation("HomePage Image",fields: [homePageImageId], references: [id])
+  homePageImageId Int?  
   productImage Product? @relation("Product Image",fields: [productImageId], references: [id])
   productImageId Int? 
   otherImage Product? @relation("Other Image",fields: [otherImageId], references: [id])

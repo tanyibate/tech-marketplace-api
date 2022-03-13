@@ -41,22 +41,22 @@ model Product {
   category Categories
   updatedAt DateTime @updatedAt
   accessories Accessories[]
-  isNew Boolean
+  new Boolean
   description String
   features String
-  productImage Image? @relation("Product Image")
+  image Image? @relation("Product Image")
   otherImage Image? @relation("Other Image")
   categoryImage Image? @relation("Category Image")
   heroImage Image? @relation("Hero Image")
   homePageImage Image? @relation("HomePage Image")
   gallery Image[] @relation("Gallery Image")
-  homePageHeroProduct HomePage? @relation("HomePage Hero Product",fields: [homePageHeroProductId], references: [id])
+  homePageHeroProduct HomePage? @relation(name: "HomePage Hero Product",fields: [homePageHeroProductId], references: [id])
   homePageHeroProductId Int? 
-  homePageFirstProduct HomePage? @relation("HomePage First Product",fields: [homePageFirstProductId], references: [id])
+  homePageFirstProduct HomePage? @relation(name:"HomePage First Product",fields: [homePageFirstProductId], references: [id])
   homePageFirstProductId Int?
-  homePageSecondProduct HomePage? @relation("HomePage Second Product",fields: [homePageSecondProductId], references: [id])
+  homePageSecondProduct HomePage? @relation(name:"HomePage Second Product",fields: [homePageSecondProductId], references: [id])
   homePageSecondProductId Int?
-  homePageThirdProduct HomePage? @relation("HomePage Third Product",fields: [homePageThirdProductId], references: [id])
+  homePageThirdProduct HomePage? @relation(name:"HomePage Third Product",fields: [homePageThirdProductId], references: [id])
   homePageThirdProductId Int?    
 }
 
@@ -67,7 +67,7 @@ model InventoryItem{
 
 model Accessories {
   id Int @id @default(autoincrement())
-  name String
+  item String
   product  Product   @relation(fields: [productId], references: [id])
   productId Int
   quantity Int
@@ -77,21 +77,21 @@ model Accessories {
 
 model Image{
   id Int @id @default(autoincrement())
-  mobileImageUrl String
-  tabletImageUrl String
-  desktopImageUrl String
-  categoryImage Product? @relation("Category Image",fields: [categoryImageId], references: [id])
+  mobile String
+  tablet String
+  desktop String
+  categoryImage Product? @relation(name:"Category Image",fields: [categoryImageId], references: [id])
   categoryImageId Int?
-  heroImage Product? @relation("Hero Image",fields: [heroImageId], references: [id])
+  heroImage Product? @relation(name:"Hero Image",fields: [heroImageId], references: [id])
   heroImageId Int?
-  homePageImage Product? @relation("HomePage Image",fields: [homePageImageId], references: [id])
+  homePageImage Product? @relation(name:"HomePage Image",fields: [homePageImageId], references: [id])
   homePageImageId Int?  
-  productImage Product? @relation("Product Image",fields: [productImageId], references: [id])
+  productImage Product? @relation(name:"Product Image",fields: [productImageId], references: [id])
   productImageId Int? 
-  otherImage Product? @relation("Other Image",fields: [otherImageId], references: [id])
+  otherImage Product? @relation(name:"Other Image",fields: [otherImageId], references: [id])
   otherImageId Int? 
-  galleryImage Product @relation("Gallery Image",fields: [galleryImageId], references: [id])
-  galleryImageId Int
+  galleryImage Product? @relation(name:"Gallery Image",fields: [galleryImageId], references: [id])
+  galleryImageId Int?
 }
 
 
@@ -102,15 +102,15 @@ enum Role {
 }
 
 enum Categories {
-  Headphones
-  Speakers
-  Laptops
-  Desktops
-  Mobiles
-  Televisions
-  Fridges
-  Freezers
-  Earphones
+  headphones
+  speakers
+  laptops
+  desktops
+  mobiles
+  televisions
+  fridges
+  freezers
+  earphones
 }
 
 enum ImageType {

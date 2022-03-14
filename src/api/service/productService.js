@@ -6,11 +6,7 @@ const getProductBySlug = async (slug) =>
       slug: slug,
     },
     include: {
-      categoryImage: true,
-      otherImage: true,
       image: true,
-      heroImage: true,
-      homePageImage: true,
     },
   });
 
@@ -18,6 +14,9 @@ const getProductsByCategory = async (category) =>
   await prisma.product.findMany({
     where: {
       category: category,
+    },
+    include: {
+      categoryImage: true,
     },
   });
 

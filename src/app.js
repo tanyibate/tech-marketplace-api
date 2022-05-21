@@ -43,7 +43,7 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-      secure: process.env.FRONT_END_URL.includes("https") ? true : false,
+      secure: "auto",
       sameSite: "none",
     },
   })

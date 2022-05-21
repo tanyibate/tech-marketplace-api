@@ -17,6 +17,7 @@ const getProductsByCategory = async (req, res) => {
   const { category } = req.params;
   try {
     const products = await productService.getProductsByCategory(category);
+    console.log(products);
     res.status(200).json(products);
   } catch (err) {
     console.log(err);

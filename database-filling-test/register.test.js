@@ -1,9 +1,9 @@
 const superTest = require("supertest");
 const chai = require("chai");
 const expect = chai.expect;
+const app = require("../src/app");
 
-const apiUrl = "http://localhost:5000";
-const api = superTest(apiUrl);
+const api = superTest(app);
 
 describe("login", () => {
   it("/login", async () => {

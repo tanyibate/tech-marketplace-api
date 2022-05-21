@@ -1,5 +1,5 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const GOOGLE_CALLBACK_URL = "http://localhost:5000/api/v1/auth/google/callback";
+const GOOGLE_CALLBACK_URL = `${process.env.APP_URL}/api/v1/auth/google/callback`;
 const upsertGoogleUser = require("../api/service/userService").upsertGoogleUser;
 
 const authenticateUser = async (

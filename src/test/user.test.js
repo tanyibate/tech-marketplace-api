@@ -1,7 +1,6 @@
 const superTest = require("supertest");
 const chai = require("chai");
 const expect = chai.expect;
-const apiUrl = "http://localhost:5000";
 const app = require("../app");
 const api = superTest(app);
 

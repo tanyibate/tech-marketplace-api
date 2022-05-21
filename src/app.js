@@ -15,8 +15,6 @@ const passport = require("passport");
 
 const app = express();
 
-app.set("trust proxy", 1);
-
 const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
   collection: process.env.MONGO_SESSION_COLLECTION,
@@ -47,6 +45,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
       secure: "auto",
       sameSite: "none",
+      httpOnly: true,
     },
   })
 );

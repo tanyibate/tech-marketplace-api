@@ -1,6 +1,6 @@
 const passport = require("passport");
-const successLoginUrl = "http://localhost:3000/login/success";
-const errorLoginUrl = "http://localhost:3000/login/error";
+const successLoginUrl = `${process.env.FRONT_END_URL}/login/success`;
+const errorLoginUrl = `${process.env.FRONT_END_URL}/login/error`;
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

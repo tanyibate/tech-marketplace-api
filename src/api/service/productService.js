@@ -7,7 +7,6 @@ const getProductBySlug = async (slug) =>
     },
     include: {
       image: true,
-      accessories: true,
     },
   });
 

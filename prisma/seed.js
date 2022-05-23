@@ -60,8 +60,8 @@ const products = [
         data: [
           {
             mobile: "/assets/xx59-headphones/mobile/image-gallery-1.jpg",
-            tablet: "./assets/xx59-headphones/tablet/image-gallery-1.jpg",
-            desktop: "./assets/xx59-headphones/desktop/image-gallery-1.jpg",
+            tablet: "/assets/xx59-headphones/tablet/image-gallery-1.jpg",
+            desktop: "/assets/xx59-headphones/desktop/image-gallery-1.jpg",
           },
           {
             mobile: "/assets/xx59-headphones/mobile/image-gallery-2.jpg",
@@ -69,8 +69,8 @@ const products = [
             desktop: "/assets/xx59-headphones/desktop/image-gallery-2.jpg",
           },
           {
-            mobile: "./assets/xx59-headphones/mobile/image-gallery-3.jpg",
-            tablet: "./assets/xx59-headphones/tablet/image-gallery-3.jpg",
+            mobile: "/assets/xx59-headphones/mobile/image-gallery-3.jpg",
+            tablet: "/assets/xx59-headphones/tablet/image-gallery-3.jpg",
             desktop: "/assets/xx59-headphones/desktop/image-gallery-3.jpg",
           },
         ],
@@ -138,9 +138,9 @@ const products = [
             mobile:
               "/assets/xx99-mark-one-headphones/mobile/image-gallery-1.jpg",
             tablet:
-              "./assets/xx99-mark-one-headphones/tablet/image-gallery-1.jpg",
+              "/assets/xx99-mark-one-headphones/tablet/image-gallery-1.jpg",
             desktop:
-              "./assets/xx99-mark-one-headphones/desktop/image-gallery-1.jpg",
+              "/assets/xx99-mark-one-headphones/desktop/image-gallery-1.jpg",
           },
           {
             mobile:
@@ -152,9 +152,9 @@ const products = [
           },
           {
             mobile:
-              "./assets/xx99-mark-one-headphones/mobile/image-gallery-3.jpg",
+              "/assets/xx99-mark-one-headphones/mobile/image-gallery-3.jpg",
             tablet:
-              "./assets/xx99-mark-one-headphones/tablet/image-gallery-3.jpg",
+              "/assets/xx99-mark-one-headphones/tablet/image-gallery-3.jpg",
             desktop:
               "/assets/xx99-mark-one-headphones/desktop/image-gallery-3.jpg",
           },
@@ -230,9 +230,9 @@ const products = [
             mobile:
               "/assets/xx99-mark-two-headphones/mobile/image-gallery-1.jpg",
             tablet:
-              "./assets/xx99-mark-two-headphones/tablet/image-gallery-1.jpg",
+              "/assets/xx99-mark-two-headphones/tablet/image-gallery-1.jpg",
             desktop:
-              "./assets/xx99-mark-two-headphones/desktop/image-gallery-1.jpg",
+              "/assets/xx99-mark-two-headphones/desktop/image-gallery-1.jpg",
           },
           {
             mobile:
@@ -244,9 +244,9 @@ const products = [
           },
           {
             mobile:
-              "./assets/xx99-mark-two-headphones/mobile/image-gallery-3.jpg",
+              "/assets/xx99-mark-two-headphones/mobile/image-gallery-3.jpg",
             tablet:
-              "./assets/xx99-mark-two-headphones/tablet/image-gallery-3.jpg",
+              "/assets/xx99-mark-two-headphones/tablet/image-gallery-3.jpg",
             desktop:
               "/assets/xx99-mark-two-headphones/desktop/image-gallery-3.jpg",
           },
@@ -308,7 +308,7 @@ const products = [
     categoryImage: {
       create: {
         mobile: "/assets/category-speakers/mobile/image-zx7.jpg",
-        tablet: "/assets/category-speaker/tablet/image-zx7.jpg",
+        tablet: "/assets/category-speakers/tablet/image-zx7.jpg",
         desktop: "/assets/category-speakers/desktop/image-zx7.jpg",
       },
     },
@@ -330,7 +330,7 @@ const products = [
           {
             mobile: "/assets/zx7-speaker/mobile/image-gallery-2.jpg",
             tablet: "/assets/zx7-speaker/tablet/image-gallery-2.jpg",
-            desktop: "./assets/zx7-speaker/desktop/image-gallery-2.jpg",
+            desktop: "/assets/zx7-speaker/desktop/image-gallery-2.jpg",
           },
           {
             mobile: "/assets/zx7-speaker/mobile/image-gallery-3.jpg",
@@ -395,7 +395,7 @@ const products = [
     categoryImage: {
       create: {
         mobile: "/assets/category-speakers/mobile/image-zx9.jpg",
-        tablet: "/assets/category-speaker/tablet/image-zx9.jpg",
+        tablet: "/assets/category-speakers/tablet/image-zx9.jpg",
         desktop: "/assets/category-speakers/desktop/image-zx9.jpg",
       },
     },
@@ -417,7 +417,7 @@ const products = [
           {
             mobile: "/assets/zx9-speaker/mobile/image-gallery-2.jpg",
             tablet: "/assets/zx9-speaker/tablet/image-gallery-2.jpg",
-            desktop: "./assets/zx9-speaker/desktop/image-gallery-2.jpg",
+            desktop: "/assets/zx9-speaker/desktop/image-gallery-2.jpg",
           },
           {
             mobile: "/assets/zx9-speaker/mobile/image-gallery-3.jpg",

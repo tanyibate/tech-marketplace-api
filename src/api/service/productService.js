@@ -22,7 +22,20 @@ const getProductsByCategory = async (category) =>
     },
   });
 
+const getOtherProducts = async (slug) =>
+  await prisma.product.findMany({
+    skip: 0,
+    take: 3,
+    where: {
+      NOT: [{ slug: slug }, { otherImage: null }],
+    },
+    include: {
+      otherImage: true,
+    },
+  });
+
 module.exports = {
   getProductBySlug,
   getProductsByCategory,
+  getOtherProducts,
 };

@@ -27,7 +27,22 @@ const getProductsByCategory = async (req, res) => {
   }
 };
 
+const getOtherProducts = async (req, res) => {
+  const { slug } = req.params;
+  try {
+    const products = await productService.getOtherProducts(slug);
+    console.log(products);
+    res.status(200).json(products);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "unable to get products",
+    });
+  }
+};
+
 module.exports = {
   getProductBySlug,
   getProductsByCategory,
+  getOtherProducts,
 };

@@ -4,21 +4,12 @@ const helmet = require("helmet");
 const cors = require("cors");
 require("dotenv").config();
 const session = require("express-session");
-const MongoDBStore = require("connect-mongodb-session")(session);
-
 const initializePassport = require("./auth/passport");
 
 const middlewares = require("./middlewares");
 const api = require("./api/routes");
 const passport = require("passport");
-//require("../auth/passportGoogleSSO");
-
 const app = express();
-
-const store = new MongoDBStore({
-  uri: process.env.MONGO_URI,
-  collection: process.env.MONGO_SESSION_COLLECTION,
-});
 
 app.use(express.json());
 
@@ -37,7 +28,6 @@ app.use(express.json());
 
 app.use(
   session({
-    store: store,
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,

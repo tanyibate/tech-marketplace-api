@@ -17,7 +17,6 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.FRONT_END_URL,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })

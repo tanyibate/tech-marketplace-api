@@ -11,90 +11,86 @@ generator client {
 }
 
 model HomePage {
-  id    Int     @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  heroProduct Product? @relation("HomePage Hero Product")
-  firstProduct Product? @relation("HomePage First Product")
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  heroProduct   Product? @relation("HomePage Hero Product")
+  firstProduct  Product? @relation("HomePage First Product")
   secondProduct Product? @relation("HomePage Second Product")
-  thirdProduct Product? @relation("HomePage Third Product")
+  thirdProduct  Product? @relation("HomePage Third Product")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  firstName  String
-  lastName String
-  createdAt DateTime @default(now())
-  address String?
-  password  String?
-  role Role @default(USER)
-  googleId String? @unique
+  id                Int      @id @default(autoincrement())
+  email             String   @unique
+  firstName         String
+  lastName          String
+  createdAt         DateTime @default(now())
+  address           String?
+  password          String?
+  role              Role     @default(USER)
+  googleId          String?  @unique
   profilePictureUrl String?
 }
 
 model Product {
-  id    Int     @id @default(autoincrement())
-  name  String
-  slug String
-  price Int
-  createdAt DateTime @default(now())  
-  category Categories
-  updatedAt DateTime @updatedAt
-  accessories Accessories[]
-  new Boolean
-  description String
-  features String
-  image Image? @relation("Product Image")
-  otherImage Image? @relation("Other Image")
-  categoryImage Image? @relation("Category Image")
-  heroImage Image? @relation("Hero Image")
-  homePageImage Image? @relation("HomePage Image")
-  gallery Image[] @relation("Gallery Image")
-  homePageHeroProduct HomePage? @relation(name: "HomePage Hero Product",fields: [homePageHeroProductId], references: [id])
-  homePageHeroProductId Int? 
-  homePageFirstProduct HomePage? @relation(name:"HomePage First Product",fields: [homePageFirstProductId], references: [id])
-  homePageFirstProductId Int?
-  homePageSecondProduct HomePage? @relation(name:"HomePage Second Product",fields: [homePageSecondProductId], references: [id])
-  homePageSecondProductId Int?
-  homePageThirdProduct HomePage? @relation(name:"HomePage Third Product",fields: [homePageThirdProductId], references: [id])
-  homePageThirdProductId Int?    
+  id                      Int           @id @default(autoincrement())
+  name                    String
+  slug                    String
+  price                   Int
+  createdAt               DateTime      @default(now())
+  category                Categories
+  updatedAt               DateTime      @updatedAt
+  accessories             Accessories[]
+  new                     Boolean
+  description             String
+  features                String
+  image                   Image?        @relation("Product Image")
+  otherImage              Image?        @relation("Other Image")
+  categoryImage           Image?        @relation("Category Image")
+  heroImage               Image?        @relation("Hero Image")
+  homePageImage           Image?        @relation("HomePage Image")
+  gallery                 Image[]       @relation("Gallery Image")
+  homePageHeroProduct     HomePage?     @relation(name: "HomePage Hero Product", fields: [homePageHeroProductId], references: [id])
+  homePageHeroProductId   Int?          @unique
+  homePageFirstProduct    HomePage?     @relation(name: "HomePage First Product", fields: [homePageFirstProductId], references: [id])
+  homePageFirstProductId  Int?          @unique
+  homePageSecondProduct   HomePage?     @relation(name: "HomePage Second Product", fields: [homePageSecondProductId], references: [id])
+  homePageSecondProductId Int?          @unique
+  homePageThirdProduct    HomePage?     @relation(name: "HomePage Third Product", fields: [homePageThirdProductId], references: [id])
+  homePageThirdProductId  Int?          @unique
 }
 
-model InventoryItem{
-  id    Int     @id @default(autoincrement())
+model InventoryItem {
+  id           Int @id @default(autoincrement())
   serialNumber Int
 }
 
 model Accessories {
-  id Int @id @default(autoincrement())
-  item String
-  product  Product   @relation(fields: [productId], references: [id])
+  id        Int     @id @default(autoincrement())
+  item      String
+  product   Product @relation(fields: [productId], references: [id])
   productId Int
-  quantity Int
+  quantity  Int
 }
 
-
-
-model Image{
-  id Int @id @default(autoincrement())
-  mobile String
-  tablet String
-  desktop String
-  categoryImage Product? @relation(name:"Category Image",fields: [categoryImageId], references: [id])
-  categoryImageId Int?
-  heroImage Product? @relation(name:"Hero Image",fields: [heroImageId], references: [id])
-  heroImageId Int?
-  homePageImage Product? @relation(name:"HomePage Image",fields: [homePageImageId], references: [id])
-  homePageImageId Int?  
-  productImage Product? @relation(name:"Product Image",fields: [productImageId], references: [id])
-  productImageId Int? 
-  otherImage Product? @relation(name:"Other Image",fields: [otherImageId], references: [id])
-  otherImageId Int? 
-  galleryImage Product? @relation(name:"Gallery Image",fields: [galleryImageId], references: [id])
-  galleryImageId Int?
+model Image {
+  id              Int      @id @default(autoincrement())
+  mobile          String
+  tablet          String
+  desktop         String
+  categoryImage   Product? @relation(name: "Category Image", fields: [categoryImageId], references: [id])
+  categoryImageId Int?     @unique
+  heroImage       Product? @relation(name: "Hero Image", fields: [heroImageId], references: [id])
+  heroImageId     Int?     @unique
+  homePageImage   Product? @relation(name: "HomePage Image", fields: [homePageImageId], references: [id])
+  homePageImageId Int?     @unique
+  productImage    Product? @relation(name: "Product Image", fields: [productImageId], references: [id])
+  productImageId  Int?     @unique
+  otherImage      Product? @relation(name: "Other Image", fields: [otherImageId], references: [id])
+  otherImageId    Int?     @unique
+  galleryImage    Product? @relation(name: "Gallery Image", fields: [galleryImageId], references: [id])
+  galleryImageId  Int?
 }
-
-
 
 enum Role {
   USER

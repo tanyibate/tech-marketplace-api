@@ -513,7 +513,7 @@ const products = [
 
 async function main() {
   products.forEach(async (product) => {
-    prisma.product
+    await prisma.product
       .create({
         data: product,
       })
